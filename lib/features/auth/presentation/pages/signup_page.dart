@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/features/auth/presentation/widget/auth_fiels.dart';
+import 'package:spotify/features/auth/presentation/widget/auth_gradinet_button.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -45,6 +46,8 @@ class _SignUpPageState extends State<SignUpPage>
             AuthField(hintText: "Name"),
             const SizedBox(height: 15,),
             AuthField(hintText: "Phone"),
+            const SizedBox(height: 15,),
+            AuthGradient_Button(),
           ],
         ),
       ),
