@@ -25,6 +25,17 @@ class _SignUpPageState extends State<SignUpPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Sign up",style: TextStyle(
+            fontSize: 50,
+            fontWeight: FontWeight.bold
+
+          ),)
+        ],
+      ),
+    );
   }
 }
