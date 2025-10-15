@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/features/auth/presentation/widget/auth_fiels.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -29,11 +30,14 @@ class _SignUpPageState extends State<SignUpPage>
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Sign up",style: TextStyle(
+          Text(
+            "Sign up",
+            style: TextStyle(
             fontSize: 50,
             fontWeight: FontWeight.bold
 
-          ),)
+          ),),
+          AuthField(hintText: "Email")
         ],
       ),
     );
