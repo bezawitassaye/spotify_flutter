@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/core/theme/theme.dart';
 import 'package:spotify/features/auth/presentation/pages/signup_page.dart';
 
 void main() {
@@ -13,9 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Blog App',
-      theme: ThemeData(
-       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: AppTheme.darkThemeMode,
       home: const SignUpPage(),
     );
   }
