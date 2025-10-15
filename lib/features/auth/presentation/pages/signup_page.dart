@@ -38,7 +38,11 @@ class _SignUpPageState extends State<SignUpPage>
 
           ),),
           const SizedBox(height: 30,),
-          AuthField(hintText: "Email")
+          AuthField(hintText: "Email"),
+          const SizedBox(height: 15,),
+          AuthField(hintText: "Name"),
+          const SizedBox(height: 15,),
+          AuthField(hintText: "Phone"),
         ],
       ),
     );
