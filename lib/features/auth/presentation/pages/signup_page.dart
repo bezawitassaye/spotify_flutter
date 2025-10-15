@@ -37,6 +37,7 @@ class _SignUpPageState extends State<SignUpPage>
             fontWeight: FontWeight.bold
 
           ),),
+          const SizedBox(height: 30,),
           AuthField(hintText: "Email")
         ],
       ),

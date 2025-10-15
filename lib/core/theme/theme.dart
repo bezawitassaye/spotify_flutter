@@ -12,7 +12,7 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.all(27),
       enabledBorder: _border(),
-      focusedBorder: _border(AppPallete.gradient1),
+      focusedBorder: _border(AppPallete.gradient2),
     ),
   );
 }
