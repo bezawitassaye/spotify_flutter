@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/core/theme/app_pallete.dart';
 import 'package:spotify/features/auth/presentation/widget/auth_fiels.dart';
 import 'package:spotify/features/auth/presentation/widget/auth_gradinet_button.dart';
 
@@ -46,8 +47,24 @@ class _SignUpPageState extends State<SignUpPage>
             AuthField(hintText: "Name"),
             const SizedBox(height: 15,),
             AuthField(hintText: "Phone"),
-            const SizedBox(height: 15,),
+            const SizedBox(height: 20,),
             AuthGradient_Button(),
+             const SizedBox(height: 20,),
+             RichText(text: TextSpan(
+              text: 'Don\'t have an account? ',
+              style: Theme.of(context).textTheme.titleMedium,
+              children: [
+                TextSpan(
+                  text: "Sign In",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: AppPallete.gradient1,
+                    fontWeight: FontWeight.bold
+                  )
+
+                )
+              ]
+
+             ))
           ],
         ),
       ),
