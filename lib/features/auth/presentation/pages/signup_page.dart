@@ -14,6 +14,10 @@ class _SignUpPageState extends State<SignUpPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
+  final emailcontroller = TextEditingController();
+  final namecontroller = TextEditingController();
+  final passwordcontroller = TextEditingController();
+  
   @override
   void initState() {
     super.initState();
@@ -22,6 +26,9 @@ class _SignUpPageState extends State<SignUpPage>
 
   @override
   void dispose() {
+     emailcontroller.dispose();
+     namecontroller.dispose();
+     passwordcontroller.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -30,6 +37,7 @@ class _SignUpPageState extends State<SignUpPage>
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -43,11 +51,11 @@ class _SignUpPageState extends State<SignUpPage>
                 style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 30),
-              AuthField(hintText: "Email"),
+              AuthField(hintText: "Email",controller: emailcontroller,),
+              const SizedBox(height: 15,),
+              AuthField(hintText: "Name",controller: namecontroller,),
               const SizedBox(height: 15),
-              AuthField(hintText: "Name"),
-              const SizedBox(height: 15),
-              AuthField(hintText: "Phone"),
+              AuthField(hintText: "Password",controller: passwordcontroller,isObscureText: true,),
               const SizedBox(height: 20),
               AuthGradient_Button(),
               const SizedBox(height: 20),
