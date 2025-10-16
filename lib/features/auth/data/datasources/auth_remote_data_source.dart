@@ -1,3 +1,4 @@
+import 'package:spotify/core/error/exceptions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
@@ -39,12 +40,13 @@ class AuthRemoteDataSourceImplement implements AuthRemoteDataSource {
         );
         
         if(response.user == null){
+          throw const ServerException("user is null");
 
         }
         return response.user!.id;
 
     }catch(e){
-
+      throw ServerException(e.toString());
     }
    
   }
