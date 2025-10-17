@@ -7,14 +7,12 @@ import 'package:spotify/features/auth/data/repositories/auth_repostory_implment.
 import 'package:spotify/features/auth/domain/usecase/user_sign_up.dart';
 import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:spotify/features/auth/presentation/pages/signup_page.dart';
+import 'package:spotify/init_dependancies.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final supbase = await Supabase.initialize(
-    url: AppSecrets.supabaseUrl,
-    anonKey: AppSecrets.anonKey,
-  );
+  await initDependencies();
   runApp(
     MultiBlocProvider(
       providers: [
