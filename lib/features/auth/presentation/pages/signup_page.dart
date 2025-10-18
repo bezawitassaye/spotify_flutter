@@ -44,62 +44,74 @@ class _SignUpPageState extends State<SignUpPage>
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Form(
-          key: formkey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Sign up.",
-                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 30),
-              AuthField(hintText: "Name", controller: namecontroller),
-              const SizedBox(height: 15),
-              AuthField(hintText: "Email", controller: emailcontroller),
-              const SizedBox(height: 15),
-              AuthField(
-                hintText: "Password",
-                controller: passwordcontroller,
-                isObscureText: true,
-              ),
-              const SizedBox(height: 20),
-              AuthGradient_Button(
-                buttonText: "Sign Up",
-                onPressed: (){
-                  if(formkey.currentState!.validate()){
-                    context.read<AuthBlocBloc>().add(
-                      AuthSignUp(
-                        email: emailcontroller.text.trim(),
-                        password: passwordcontroller.text.trim(),
-                        name: namecontroller.text.trim())
-                    );
-                  }
-                },),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context)=>SignInPage()));
-                },
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Already have an account? ',
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: [
-                      TextSpan(
-                        text: "Sign In",
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppPallete.gradient1,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+        child: BlocConsumer<AuthBlocBloc, AuthBlocState>(
+          listener: (context, state) {
+            // TODO: implement listener
+          },
+          builder: (context, state) {
+            return Form(
+              key: formkey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Sign up.",
+                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                   ),
-                ),
+                  const SizedBox(height: 30),
+                  AuthField(hintText: "Name", controller: namecontroller),
+                  const SizedBox(height: 15),
+                  AuthField(hintText: "Email", controller: emailcontroller),
+                  const SizedBox(height: 15),
+                  AuthField(
+                    hintText: "Password",
+                    controller: passwordcontroller,
+                    isObscureText: true,
+                  ),
+                  const SizedBox(height: 20),
+                  AuthGradient_Button(
+                    buttonText: "Sign Up",
+                    onPressed: () {
+                      if (formkey.currentState!.validate()) {
+                        context.read<AuthBlocBloc>().add(
+                          AuthSignUp(
+                            email: emailcontroller.text.trim(),
+                            password: passwordcontroller.text.trim(),
+                            name: namecontroller.text.trim(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignInPage()),
+                      );
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Already have an account? ',
+                        style: Theme.of(context).textTheme.titleMedium,
+                        children: [
+                          TextSpan(
+                            text: "Sign In",
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(
+                                  color: AppPallete.gradient1,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
