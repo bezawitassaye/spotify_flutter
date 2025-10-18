@@ -25,6 +25,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
        _currentUser = currentUser,
        _appUserCubit = appUserCubit,
        super(AuthBlocInitial()) {
+    on<AuthBlocEvent>((_,emit) => emit(AuthLoading()));    
     on<AuthSignUp>(_onAuthSignUp);
     on<AuthLogin>(_onAuthLogin);
     on<AuthIsUserLoggedIn>(_isUserLoggedIn);
@@ -37,7 +38,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     final res = await _currentUser(NoParams());
     res.fold((l) => emit(AuthFailure(l.message)), (r) {
       print(r.name);
-      _emitAuthSuccess(r, emit);
+      emit(AuthSuccess(r));
     });
   }
 
