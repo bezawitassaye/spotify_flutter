@@ -65,10 +65,21 @@ class _NewBlogState extends State<NewBlog> {
                   "Entertainment",
                 ].map((e)=>Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Chip(
-                    label: Text(e),
-                    side: const BorderSide(
-                      color: AppPallete.borderColor
+                  child: GestureDetector(
+                    onTap: (){
+                      if (selectedTopics.contains(e)){
+                        selectedTopics.remove(e);
+                      }
+                      selectedTopics.add(e);
+                      setState(() {
+                        
+                      });
+                    },
+                    child: Chip(
+                      label: Text(e),
+                      side: const BorderSide(
+                        color: AppPallete.borderColor
+                      ),
                     ),
                   ),
                 ),).toList(),
