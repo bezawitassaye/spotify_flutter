@@ -4,6 +4,7 @@ import 'package:spotify/core/error/failures.dart';
 import 'package:spotify/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:spotify/features/auth/domain/entities/user.dart';
 import 'package:spotify/features/auth/domain/repository/auth_repository.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sb;
 
 class AuthRepostoryImplment implements AuthRepository {
   
@@ -45,7 +46,11 @@ class AuthRepostoryImplment implements AuthRepository {
         
         
         return right(user);
-    } on ServerException catch(e){
+    } on sb.AuthException catch(e){
+         return left(Failures(e.message));
+    }
+    
+    on ServerException catch(e){
          return left(Failures(e.message));
     }
 
