@@ -15,3 +15,12 @@ final class AuthSignUp extends AuthBlocEvent {
   });
 }
 
+final class AuthLogin extends AuthBlocEvent {
+  final String email;
+  final String password;
+
+  AuthLogin({
+    required this.email,
+    required this.password,
+  });
+}
