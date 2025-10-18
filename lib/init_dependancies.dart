@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:spotify/core/common/cubits/app_user_cubit/app_user_cubit.dart';
 import 'package:spotify/core/secrets/app_secrets.dart';
 import 'package:spotify/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:spotify/features/auth/data/repositories/auth_repostory_implment.dart';
@@ -18,6 +19,7 @@ Future<void> initDependencies() async {
     anonKey: AppSecrets.anonKey,
   );
   serviceLocator.registerLazySingleton(() => supbase.client);
+  serviceLocator.registerLazySingleton(() => AppUserCubit(),);
 }
 
 void _initAuth() {
@@ -38,6 +40,7 @@ void _initAuth() {
       userSignUp: serviceLocator(), 
       userLogin: serviceLocator(),
       currentUser: serviceLocator(),
+      appUserCubit: serviceLocator(),
       ),
   );
 }
