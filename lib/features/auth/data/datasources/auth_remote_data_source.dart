@@ -3,6 +3,7 @@ import 'package:spotify/features/auth/data/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
+  Session? get currentSession;
   Future<UserModel> signUpWithEmailPassword({
     required String name,
     required String email,
@@ -13,6 +14,8 @@ abstract interface class AuthRemoteDataSource {
     required String email,
     required String password,
   });
+
+  Future<UserModel?> getCurrentUserData();
 }
 
 class AuthRemoteDataSourceImplement implements AuthRemoteDataSource {
@@ -70,5 +73,25 @@ class AuthRemoteDataSourceImplement implements AuthRemoteDataSource {
       // Catch all other exceptions
       throw ServerException(e.toString());
     }
+  }
+  
+  @override
+  
+  Session? get currentSession => supabaseClient.auth.currentSession;
+  
+  @override
+  Future<UserModel?> getCurrentUserData() async {
+    try{
+      if (currentSession != null) {
+        final userData = await supabaseClient.from('profiles').select().eq(
+        'id', currentSession!.user.id);
+        return UserModel.fromJson(userData.first);
+      }
+      return null;
+      
+    }catch(e){
+      throw ServerException(e.toString());
+    }
+    
   }
 }
