@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify/core/common/cubits/app_user_cubit/app_user_cubit.dart';
 import 'package:spotify/core/theme/theme.dart';
 import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
+import 'package:spotify/features/auth/presentation/pages/signin_page.dart';
 import 'package:spotify/features/auth/presentation/pages/signup_page.dart';
 import 'package:spotify/init_dependancies.dart';
 
@@ -12,12 +13,8 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => serviceLocator<AppUserCubit>(),
-        ),
-        BlocProvider(
-          create: (_) => serviceLocator<AuthBlocBloc>(),
-        ),
+        BlocProvider(create: (_) => serviceLocator<AppUserCubit>()),
+        BlocProvider(create: (_) => serviceLocator<AuthBlocBloc>()),
       ],
       child: const MyApp(),
     ),
@@ -33,17 +30,32 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
     context.read<AuthBlocBloc>().add(AuthIsUserLoggedIn());
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Blog App',
       theme: AppTheme.darkThemeMode,
-      home: const SignUpPage(),
+      home: BlocSelector<AppUserCubit, AppUserState, bool>(
+        selector: (state) {
+          return state is AppUserLoggedIn;
+        },
+        builder: (context, Isloggedin) {
+          if(Isloggedin){
+            return const Scaffold(
+              body: Center(
+                child: Text("Logged in!"),
+              ),
+            );
+          }
+          return const SignInPage();
+        },
+      ),
     );
   }
 }
