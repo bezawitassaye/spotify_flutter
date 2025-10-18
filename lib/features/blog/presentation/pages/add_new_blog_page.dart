@@ -47,7 +47,10 @@ class _NewBlogState extends State<NewBlog> {
           child: Column(
             children: [
               image != null ?
-              Image.file(image!)
+              SizedBox(
+                width: double.infinity,
+                height: 150,
+                child: Image.file(image!))
               :
               GestureDetector(
                 onTap: (){
