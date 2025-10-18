@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify/core/common/widgets/loader.dart';
 import 'package:spotify/core/theme/app_pallete.dart';
 import 'package:spotify/core/utils/show_snackbar.dart';
 import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
@@ -50,6 +51,9 @@ class _SignInPageState extends State<SignInPage>
             }
           },
           builder: (context, state) {
+            if(state is AuthLoading){
+              return const Loader();
+            }
             return Form(
               key: formkey,
               child: Column(
