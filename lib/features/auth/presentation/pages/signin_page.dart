@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify/core/theme/app_pallete.dart';
+import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:spotify/features/auth/presentation/pages/signup_page.dart';
 import 'package:spotify/features/auth/presentation/widget/auth_fiels.dart';
 import 'package:spotify/features/auth/presentation/widget/auth_gradinet_button.dart';
@@ -61,7 +63,7 @@ class _SignInPageState extends State<SignInPage>
               AuthGradient_Button(
                 buttonText: "Sign In",
                 onPressed: () {
-                  
+                  context.read<AuthBlocBloc>().add(AuthLogin(email: emailcontroller.text, password: passwordcontroller.text));
                 },),
               const SizedBox(height: 20),
               GestureDetector(
