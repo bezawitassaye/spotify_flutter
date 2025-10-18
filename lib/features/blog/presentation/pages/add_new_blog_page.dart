@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NewBlog extends StatefulWidget {
+  static route() => MaterialPageRoute(
+    builder: (context)=> const NewBlog());
   const NewBlog({super.key});
 
   @override
