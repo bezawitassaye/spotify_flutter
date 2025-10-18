@@ -14,6 +14,7 @@ class NewBlog extends StatefulWidget {
 class _NewBlogState extends State<NewBlog> {
   final titleController = TextEditingController();
   final contentController = TextEditingController();
+  List<String> selectedTopics=[];
   @override
   void dispose() {
     super.dispose();
@@ -28,58 +29,60 @@ class _NewBlogState extends State<NewBlog> {
           IconButton(onPressed: () {}, icon: const Icon(Icons.done_rounded)),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            DottedBorder(
-              dashPattern: const [10, 4],
-              color: AppPallete.borderColor,
-              radius: const Radius.circular(10),
-              borderType: BorderType.RRect,
-              strokeCap: StrokeCap.round,  
-              child: Container(
-                height: 150,
-                width: double.infinity,
-                
-
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.folder_open, size: 40),
-                    SizedBox(height: 15),
-                    Text('Select your image', style: TextStyle(fontSize: 15)),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20,),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(children: [
-                "Technology",
-                "Business",
-                "Programing",
-                "Entertainment",
-              ].map((e)=>Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Chip(
-                  label: Text(e),
-                  side: const BorderSide(
-                    color: AppPallete.borderColor
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              DottedBorder(
+                dashPattern: const [10, 4],
+                color: AppPallete.borderColor,
+                radius: const Radius.circular(10),
+                borderType: BorderType.RRect,
+                strokeCap: StrokeCap.round,  
+                child: Container(
+                  height: 150,
+                  width: double.infinity,
+                  
+        
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.folder_open, size: 40),
+                      SizedBox(height: 15),
+                      Text('Select your image', style: TextStyle(fontSize: 15)),
+                    ],
                   ),
                 ),
-              ),).toList(),
-              
               ),
-            ),
-            const SizedBox(height: 10,),
-            BlogEditor(
-              controller: titleController, hintText: "Blog Title"),
-            const SizedBox(height: 10,),
-            BlogEditor(
-              controller: contentController, hintText: "Blog Content"),
-          ],
+              const SizedBox(height: 20,),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(children: [
+                  "Technology",
+                  "Business",
+                  "Programing",
+                  "Entertainment",
+                ].map((e)=>Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Chip(
+                    label: Text(e),
+                    side: const BorderSide(
+                      color: AppPallete.borderColor
+                    ),
+                  ),
+                ),).toList(),
+                
+                ),
+              ),
+              const SizedBox(height: 10,),
+              BlogEditor(
+                controller: titleController, hintText: "Blog Title"),
+              const SizedBox(height: 10,),
+              BlogEditor(
+                controller: contentController, hintText: "Blog Content"),
+            ],
+          ),
         ),
       ),
     );
