@@ -44,6 +44,7 @@ class _NewBlogState extends State<NewBlog> {
                 ),
               ),
             ),
+            const SizedBox(height: 20,),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(children: [
@@ -51,10 +52,13 @@ class _NewBlogState extends State<NewBlog> {
                 "Business",
                 "Programing",
                 "Entertainment",
-              ].map((e)=>Chip(
-                label: Text(e),
-                side: const BorderSide(
-                  color: AppPallete.borderColor
+              ].map((e)=>Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Chip(
+                  label: Text(e),
+                  side: const BorderSide(
+                    color: AppPallete.borderColor
+                  ),
                 ),
               ),).toList(),
               
