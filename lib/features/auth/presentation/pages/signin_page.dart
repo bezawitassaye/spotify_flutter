@@ -63,8 +63,11 @@ class _SignInPageState extends State<SignInPage>
               AuthGradient_Button(
                 buttonText: "Sign In",
                 onPressed: () {
-                  context.read<AuthBlocBloc>().add(AuthLogin(email: emailcontroller.text.trim(), password: passwordcontroller.text.trim()));
-                },),
+                  if(formkey.currentState!.validate()){
+                     context.read<AuthBlocBloc>().add(AuthLogin(email: emailcontroller.text.trim(), password: passwordcontroller.text.trim()));
+               
+                  }
+                 },),
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
