@@ -14,9 +14,13 @@ class AuthRepostoryImplment implements AuthRepository {
   Future<Either<Failures, User>> signInWithEmailPassword({
     required String email,
     required String password,
-  }) {
-    // TODO: implement signInWithEmailPassword
-    throw UnimplementedError();
+  }) async {
+    return  _getUser(
+      () async => await remoteDataSource.signInWithEmailPassword(
+      email: email,
+      password: password,
+    ));
+    
   }
 
   @override
@@ -25,15 +29,25 @@ class AuthRepostoryImplment implements AuthRepository {
     required String email,
     required String password,
   }) async {
+    return await _getUser(() => remoteDataSource.signUpWithEmailPassword(
+      name: name,
+      email: email,
+      password: password,
+    ));
+    
+  }
+
+  Future<Either<Failures,User>> _getUser(
+    Future<User> Function() fn,
+  ) async{
     try{
-      final userId = await remoteDataSource.signUpWithEmailPassword(
-        name: name,
-        email: email,
-        password: password,);
+      final user = await fn();
         
-        return right(userId);
+        
+        return right(user);
     } on ServerException catch(e){
          return left(Failures(e.message));
     }
+
   }
 }
