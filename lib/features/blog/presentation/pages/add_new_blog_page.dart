@@ -23,25 +23,30 @@ class _NewBlogState extends State<NewBlog> {
             ))
         ],
       ),
-      body: Column(
-        children: [
-          DottedBorder(child: Container(
-            height: 150,
-            width: double.infinity,
-            child: Column(
-              children: [
-                Icon(
-                  Icons.folder_open,
-                  size: 40,
-                ),
-                SizedBox(height: 15,),
-                Text('Select your image',
-                style: TextStyle(fontSize: 15),)
-              ],
-            ),
-
-          ))
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            DottedBorder(child: Container(
+              height: 150,
+              width: double.infinity,
+              
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.folder_open,
+                    size: 40,
+                  ),
+                  SizedBox(height: 15,),
+                  Text('Select your image',
+                  style: TextStyle(fontSize: 15),)
+                ],
+              ),
+        
+            ))
+          ],
+        ),
       ),
     );
   }
