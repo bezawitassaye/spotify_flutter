@@ -1,14 +1,15 @@
 import 'package:spotify/core/error/exceptions.dart';
+import 'package:spotify/features/auth/data/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Future<String> signUpWithEmailPassword({
+  Future<UserModel> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
   });
 
-  Future<String> signInWithEmailPassword({
+  Future<UserModel> signInWithEmailPassword({
     required String email,
     required String password,
   });
@@ -20,7 +21,7 @@ class AuthRemoteDataSourceImplement implements AuthRemoteDataSource {
   AuthRemoteDataSourceImplement(this.supabaseClient);
 
   @override
-  Future<String> signInWithEmailPassword({
+  Future<UserModel> signInWithEmailPassword({
     required String email,
     required String password,
   }) {
@@ -29,7 +30,7 @@ class AuthRemoteDataSourceImplement implements AuthRemoteDataSource {
   }
 
   @override
-  Future<String> signUpWithEmailPassword({
+  Future<UserModel> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
@@ -43,11 +44,11 @@ class AuthRemoteDataSourceImplement implements AuthRemoteDataSource {
 
       // If user is null, likely email confirmation required
       if (response.user == null) {
-        return 'Check your email to confirm signup';
+        throw ServerException('User is null');
       }
 
       // Successful signup
-      return response.user!.id;
+      return UserModel.fromJson(response.user!.toJson());
     } catch (e) {
       // Catch all other exceptions
       throw ServerException(e.toString());
