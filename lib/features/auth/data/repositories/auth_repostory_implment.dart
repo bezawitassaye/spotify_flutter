@@ -2,6 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:spotify/core/error/exceptions.dart';
 import 'package:spotify/core/error/failures.dart';
 import 'package:spotify/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:spotify/features/auth/domain/entities/user.dart';
 import 'package:spotify/features/auth/domain/repository/auth_repository.dart';
 
 class AuthRepostoryImplment implements AuthRepository {
@@ -10,7 +11,7 @@ class AuthRepostoryImplment implements AuthRepository {
   const AuthRepostoryImplment(this.remoteDataSource);
 
   @override
-  Future<Either<Failures, String>> signInWithEmailPassword({
+  Future<Either<Failures, User>> signInWithEmailPassword({
     required String email,
     required String password,
   }) {
@@ -19,7 +20,7 @@ class AuthRepostoryImplment implements AuthRepository {
   }
 
   @override
-  Future<Either<Failures, String>> signUpWithEmailPassword({
+  Future<Either<Failures, User>> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
