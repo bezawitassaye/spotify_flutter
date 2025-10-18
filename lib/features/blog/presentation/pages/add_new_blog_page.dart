@@ -51,7 +51,12 @@ class _NewBlogState extends State<NewBlog> {
                 "Business",
                 "Programing",
                 "Entertainment",
-              ].map((e)=>Chip(label: Text(e),),).toList(),
+              ].map((e)=>Chip(
+                label: Text(e),
+                side: const BorderSide(
+                  color: AppPallete.borderColor
+                ),
+              ),).toList(),
               
               ),
             )
