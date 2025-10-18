@@ -37,7 +37,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   ) async {
     final res = await _currentUser(NoParams());
     res.fold((l) => emit(AuthFailure(l.message)), (r) {
-      print(r.name);
+      print(r.email);
       emit(AuthSuccess(r));
     });
   }
