@@ -1,19 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BlogPage extends StatelessWidget {
-  const BlogPage({super.key});
+class NewBlog extends StatefulWidget {
+  const NewBlog({super.key});
 
+  @override
+  State<NewBlog> createState() => _NewBlogState();
+}
+
+class _NewBlogState extends State<NewBlog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Blog App'),
         actions: [
           IconButton(
             onPressed: (){}, 
             icon: const Icon(
-              CupertinoIcons.add_circled
+              Icons.done_rounded
             ))
         ],
       ),
