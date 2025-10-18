@@ -57,7 +57,7 @@ class AuthRepostoryImplment implements AuthRepository {
   }
   
   @override
-  Future<Either<Failures, User?>> currentUser() async {
+  Future<Either<Failures, User>> currentUser() async {
     try{
       final user = await remoteDataSource.getCurrentUserData();
       if (user == null) {
