@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify/core/usecase/usecase.dart';
-import 'package:spotify/features/auth/domain/entities/user.dart';
+import 'package:spotify/core/common/entities/user.dart';
 import 'package:spotify/features/auth/domain/usecase/current_user.dart';
 import 'package:spotify/features/auth/domain/usecase/user_sign_in.dart';
 import 'package:spotify/features/auth/domain/usecase/user_sign_up.dart';

@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:spotify/core/error/failures.dart';
-import 'package:spotify/features/auth/domain/entities/user.dart';
+import 'package:spotify/core/common/entities/user.dart';
 
 abstract interface class AuthRepository {
   Future<Either<Failures, User>> signUpWithEmailPassword({

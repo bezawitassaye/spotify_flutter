@@ -1,4 +1,4 @@
-import 'package:spotify/features/auth/domain/entities/user.dart';
+import 'package:spotify/core/common/entities/user.dart';
 
 class UserModel extends User {
   UserModel({required super.id, required super.email, required super.name});
