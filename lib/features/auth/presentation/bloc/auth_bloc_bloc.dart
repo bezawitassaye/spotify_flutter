@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify/features/auth/domain/entities/user.dart';
 import 'package:spotify/features/auth/domain/usecase/user_sign_up.dart';
 
 part 'auth_bloc_event.dart';
@@ -18,7 +19,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
           name: event.name,
         ),
       );
-      res.fold((l)=>AuthFailure(l.message), (uid)=>AuthSuccess(uid));
+      res.fold((l)=>AuthFailure(l.message), (user)=>AuthSuccess(user));
     });
   }
 }

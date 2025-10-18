@@ -9,8 +9,8 @@ final class AuthBlocInitial extends AuthBlocState {}
 final class AuthLoading extends AuthBlocState{}
 
 final class AuthSuccess extends AuthBlocState{
-  final String uid;
-  AuthSuccess(this.uid);
+  final User user;
+  AuthSuccess(this.user);
 }
 
 final class AuthFailure extends AuthBlocState{
