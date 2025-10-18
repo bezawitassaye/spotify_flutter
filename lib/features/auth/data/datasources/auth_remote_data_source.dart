@@ -24,9 +24,26 @@ class AuthRemoteDataSourceImplement implements AuthRemoteDataSource {
   Future<UserModel> signInWithEmailPassword({
     required String email,
     required String password,
-  }) {
-    // TODO: implement signInWithEmailPassword
-    throw UnimplementedError();
+  }) async {
+     try {
+      final response = await supabaseClient.auth.signInWithPassword(
+        email: email,
+        password: password,
+        
+      );
+
+      // If user is null, likely email confirmation required
+      if (response.user == null) {
+        throw ServerException('User is null');
+      }
+
+      // Successful signup
+      return UserModel.fromJson(response.user!.toJson());
+    } catch (e) {
+      // Catch all other exceptions
+      throw ServerException(e.toString());
+    }
+    
   }
 
   @override
