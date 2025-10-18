@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify/core/common/widgets/loader.dart';
 import 'package:spotify/core/theme/app_pallete.dart';
+import 'package:spotify/core/utils/show_snackbar.dart';
 import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:spotify/features/auth/presentation/pages/signin_page.dart';
 import 'package:spotify/features/auth/presentation/widget/auth_fiels.dart';
@@ -47,7 +48,9 @@ class _SignUpPageState extends State<SignUpPage>
         padding: const EdgeInsets.all(15.0),
         child: BlocConsumer<AuthBlocBloc, AuthBlocState>(
           listener: (context, state) {
-            // TODO: implement listener
+            if(state is AuthFailure){
+              showSnackBar(context, state.message);
+              }
           },
           builder: (context, state) {
             if(state is AuthLoading){
