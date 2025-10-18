@@ -24,15 +24,15 @@ class _NewBlogState extends State<NewBlog> {
         child: Column(
           children: [
             DottedBorder(
-              options: RectDottedBorderOptions(
-                dashPattern: [10, 4],
-                color: AppPallete.borderColor,
-                strokeWidth: 2,
-                padding: EdgeInsets.all(16),
-              ),
+              dashPattern: const [10, 4],
+              color: AppPallete.borderColor,
+              radius: const Radius.circular(10),
+              borderType: BorderType.RRect,
+              strokeCap: StrokeCap.round,  
               child: Container(
                 height: 150,
                 width: double.infinity,
+                
 
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -44,6 +44,17 @@ class _NewBlogState extends State<NewBlog> {
                 ),
               ),
             ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(children: [
+                "Technology",
+                "Business",
+                "Programing",
+                "Entertainment",
+              ].map((e)=>Chip(label: Text(e),),).toList(),
+              
+              ),
+            )
           ],
         ),
       ),
