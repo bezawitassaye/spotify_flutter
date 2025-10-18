@@ -17,13 +17,7 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => AuthBlocBloc(
-            userSignUp: UserSignUp(
-              AuthRepostoryImplment(
-                AuthRemoteDataSourceImplement(supbase.client),
-              ),
-            ),
-          ),
+          create: (_) => serviceLocator<AuthBlocBloc>(),
         ),
       ],
       child: const MyApp(),
