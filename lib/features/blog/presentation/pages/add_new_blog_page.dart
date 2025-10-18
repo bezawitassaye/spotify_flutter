@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify/core/theme/app_pallete.dart';
+import 'package:spotify/features/blog/presentation/widgets/blog_editor.dart';
 
 class NewBlog extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => const NewBlog());
@@ -11,6 +12,14 @@ class NewBlog extends StatefulWidget {
 }
 
 class _NewBlogState extends State<NewBlog> {
+  final titleController = TextEditingController();
+  final contentController = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    titleController.dispose();
+    contentController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +72,13 @@ class _NewBlogState extends State<NewBlog> {
               ),).toList(),
               
               ),
-            )
+            ),
+            const SizedBox(height: 10,),
+            BlogEditor(
+              controller: titleController, hintText: "Blog Title"),
+            const SizedBox(height: 10,),
+            BlogEditor(
+              controller: contentController, hintText: "Blog Content"),
           ],
         ),
       ),
