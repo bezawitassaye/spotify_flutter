@@ -69,15 +69,23 @@ class _NewBlogState extends State<NewBlog> {
                     onTap: (){
                       if (selectedTopics.contains(e)){
                         selectedTopics.remove(e);
+                      } else{
+                        selectedTopics.add(e);
                       }
-                      selectedTopics.add(e);
+                      
                       setState(() {
                         
                       });
                     },
                     child: Chip(
                       label: Text(e),
-                      side: const BorderSide(
+                      color: selectedTopics.contains(e)?
+                      const MaterialStatePropertyAll(
+                        AppPallete.gradient2
+                      ): null,
+                      side: selectedTopics.contains(e)?
+                      null:
+                       const BorderSide(
                         color: AppPallete.borderColor
                       ),
                     ),
