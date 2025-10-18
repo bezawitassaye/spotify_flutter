@@ -46,6 +46,9 @@ class _NewBlogState extends State<NewBlog> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
+              image != null ?
+              Image.file(image!)
+              :
               GestureDetector(
                 onTap: (){
                   selectImage();
