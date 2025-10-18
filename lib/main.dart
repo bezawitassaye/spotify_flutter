@@ -5,6 +5,7 @@ import 'package:spotify/core/theme/theme.dart';
 import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:spotify/features/auth/presentation/pages/signin_page.dart';
 import 'package:spotify/features/auth/presentation/pages/signup_page.dart';
+import 'package:spotify/features/blog/presentation/pages/blog_page.dart';
 import 'package:spotify/init_dependancies.dart';
 
 void main() async {
@@ -47,11 +48,8 @@ class _MyAppState extends State<MyApp> {
         },
         builder: (context, Isloggedin) {
           if(Isloggedin){
-            return const Scaffold(
-              body: Center(
-                child: Text("Logged in!"),
-              ),
-            );
+            return BlogPage();
+            
           }
           return const SignInPage();
         },

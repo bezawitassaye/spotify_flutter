@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BlogPage extends StatelessWidget {
@@ -5,6 +6,18 @@ class BlogPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Blog App'),
+        actions: [
+          IconButton(
+            onPressed: (){}, 
+            icon: const Icon(
+              CupertinoIcons.add_circled
+            ))
+        ],
+      ),
+
+    );
   }
 }
