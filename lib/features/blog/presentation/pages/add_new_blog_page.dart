@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify/core/common/cubits/app_user_cubit/app_user_cubit.dart';
 import 'package:spotify/core/theme/app_pallete.dart';
 import 'package:spotify/core/utils/pick_image.dart';
+import 'package:spotify/features/blog/presentation/bloc/blog_bloc_bloc.dart';
 import 'package:spotify/features/blog/presentation/widgets/blog_editor.dart';
 
 class NewBlog extends StatefulWidget {
@@ -41,8 +44,13 @@ class _NewBlogState extends State<NewBlog> {
         actions: [
           IconButton(
             onPressed: () {
-              if(formkey.currentState!.validate()){
-                
+              if(formkey.currentState!.validate() &&
+              selectedTopics.isNotEmpty && image != null){
+
+                final posterId=(context.read<AppUserCubit>().state as AppUserLoggedIn).user.id;           
+                context.read<BlogBlocBloc>().add(BlogUpload(posterId: posterId, title: titleController.text.trim(), content: contentController.text.trim(), image: image!, topics: selectedTopics),);
+
+
               }
 
             }, icon: const Icon(Icons.done_rounded)),
