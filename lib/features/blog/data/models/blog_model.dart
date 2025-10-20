@@ -10,4 +10,35 @@ class BlogModel extends Blog {
     required super.topics,
     required super.updatedAt,
   });
+
+/// ✅ Create a Blog object from a Map (e.g., from database or JSON)
+  factory BlogModel.fromMap(Map<String, dynamic> map) {
+    return BlogModel(
+      id: map['id'] ?? '',
+      posterId: map['posterId'] ?? '',
+      title: map['title'] ?? '',
+      content: map['content'] ?? '',
+      imageUrl: map['imageUrl'] ?? '',
+      topics: map['topics'] != null
+          ? List<String>.from(map['topics'])
+          : <String>[],
+      updatedAt: map['updatedAt'] is String
+          ? DateTime.tryParse(map['updatedAt']) ?? DateTime.now()
+          : (map['updatedAt'] ?? DateTime.now()),
+    );
+  }
+
+  /// ✅ Convert a Blog object back into a Map (for uploading/saving)
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'posterId': posterId,
+      'title': title,
+      'content': content,
+      'imageUrl': imageUrl,
+      'topics': topics,
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
 }
