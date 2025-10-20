@@ -32,12 +32,12 @@ class BlogModel extends Blog {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'posterId': posterId,
+      'poster_id': posterId,
       'title': title,
       'content': content,
-      'imageUrl': imageUrl,
+      'image_url': imageUrl,
       'topics': topics,
-      'updatedAt': updatedAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
     };
   }
 
