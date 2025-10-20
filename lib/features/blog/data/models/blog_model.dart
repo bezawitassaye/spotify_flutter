@@ -22,9 +22,9 @@ class BlogModel extends Blog {
       topics: map['topics'] != null
           ? List<String>.from(map['topics'])
           : <String>[],
-      updatedAt: map['updatedAt'] is String
-          ? DateTime.tryParse(map['updatedAt']) ?? DateTime.now()
-          : (map['updatedAt'] ?? DateTime.now()),
+      updatedAt: map['updated_at'] == null ?
+          DateTime.now() :      
+          DateTime.parse(map['updated_at'])
     );
   }
 
