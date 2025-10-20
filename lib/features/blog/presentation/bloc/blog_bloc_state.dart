@@ -3,18 +3,18 @@ part of 'blog_bloc_bloc.dart';
 @immutable
 sealed class BlogBlocState {}
 
-final class BlogInitial extends BlogBlocState {}
+final class BlogBlocInitial extends BlogBlocState {}
 
-final class BlogLoading extends BlogBlocState {}
+final class BlogBlocLoading extends BlogBlocState {}
 
-final class BlogFailure extends BlogBlocState {
+final class BlogBlocFailure extends BlogBlocState {
   final String error;
-  BlogFailure(this.error);
+  BlogBlocFailure(this.error);
 }
 
-final class BlogUploadSuccess extends BlogBlocState {}
+final class BlogBlocUploadSuccess extends BlogBlocState {}
 
-final class BlogsDisplaySuccess extends BlogBlocState {
+final class BlogBlocDisplaySuccess extends BlogBlocState {
   final List<Blog> blogs;
-  BlogsDisplaySuccess(this.blogs);
+  BlogBlocDisplaySuccess(this.blogs);
 }

@@ -1,16 +1,36 @@
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify/features/blog/domain/entities/blog.dart';
-
+import 'package:spotify/features/blog/domain/usecases/upload_blog.dart';
 part 'blog_bloc_event.dart';
 part 'blog_bloc_state.dart';
 
 class BlogBlocBloc extends Bloc<BlogBlocEvent, BlogBlocState> {
-  BlogBlocBloc() : super(BlogBlocInitial()) {
+  final UploadBlog uploadBlog;
+  BlogBlocBloc(this.uploadBlog) : super(BlogBlocInitial()) {
     on<BlogBlocEvent>((event, emit) {
-      // TODO: implement event handler
+      emit(BlogBlocLoading());
     });
+
+    on<BlogUpload>(_onBlogUpload);
+
+
+  }
+  void _onBlogUpload(
+    BlogUpload event,
+    Emitter<BlogBlocState> emit,
+  ) async{
+  final res = await uploadBlog(
+    UploadBlogParams(posterId: event.posterId, title: event.title, content: event.content, image: event.image, topics: event.topics)
+   );
+
+   res.fold(
+    (l) => emit(BlogBlocFailure(l.message)),
+    (r) => emit(
+      BlogBlocUploadSuccess(),
+    )
+   );
   }
 }
