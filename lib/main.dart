@@ -4,7 +4,6 @@ import 'package:spotify/core/common/cubits/app_user_cubit/app_user_cubit.dart';
 import 'package:spotify/core/theme/theme.dart';
 import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:spotify/features/auth/presentation/pages/signin_page.dart';
-import 'package:spotify/features/auth/presentation/pages/signup_page.dart';
 import 'package:spotify/features/blog/presentation/pages/blog_page.dart';
 import 'package:spotify/init_dependancies.dart';
 

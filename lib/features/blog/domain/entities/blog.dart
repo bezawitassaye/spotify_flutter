@@ -1,5 +1,3 @@
-import 'package:spotify/features/blog/data/models/blog_model.dart';
-
 class Blog {
   final String id;
   final String posterId;
@@ -18,5 +16,4 @@ class Blog {
     required this.topics,
     required this.updatedAt,
   });
-
 }
