@@ -73,8 +73,8 @@ class _NewBlogState extends State<NewBlog> {
         listener: (context, state) {
           if(state is BlogBlocFailure){
             showSnackBar(context, state.error);
-          } else{
-            
+          } else if(state is BlogBlocUploadSuccess){
+            Navigator.pushAndRemoveUntil(context, newRoute, predicate)
           }
         },
         builder: (context, state) {
