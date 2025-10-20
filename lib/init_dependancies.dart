@@ -8,12 +8,17 @@ import 'package:spotify/features/auth/domain/usecase/current_user.dart';
 import 'package:spotify/features/auth/domain/usecase/user_sign_in.dart';
 import 'package:spotify/features/auth/domain/usecase/user_sign_up.dart';
 import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
+import 'package:spotify/features/blog/data/datasources/blog_remote_data_source.dart';
+import 'package:spotify/features/blog/data/repositories/blog_repository_impl.dart';
+import 'package:spotify/features/blog/domain/repositories/blog_repository.dart';
+import 'package:spotify/features/blog/presentation/bloc/blog_bloc_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
   _initAuth();
+  _initBlog();
   final supbase = await Supabase.initialize(
     url: AppSecrets.supabaseUrl,
     anonKey: AppSecrets.anonKey,
@@ -42,5 +47,13 @@ void _initAuth() {
       currentUser: serviceLocator(),
       appUserCubit: serviceLocator(),
       ),
+  );
+}
+
+void _initBlog() {
+  serviceLocator.registerFactory<BlogRemoteDataSource>(
+    () => BlogRemoteDataSourceImplementation(
+      supabaseClient: serviceLocator(),
+    ),
   );
 }
