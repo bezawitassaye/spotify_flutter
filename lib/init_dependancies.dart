@@ -63,4 +63,9 @@ void _initBlog() {
   serviceLocator.registerFactory(() => UploadBlog(serviceLocator()));
 
 
+  serviceLocator.registerLazySingleton(
+    () => BlogBlocBloc(serviceLocator())
+  );
+
+
 }
