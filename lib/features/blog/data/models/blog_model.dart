@@ -12,7 +12,7 @@ class BlogModel extends Blog {
   });
 
 /// ✅ Create a Blog object from a Map (e.g., from database or JSON)
-  factory BlogModel.fromMap(Map<String, dynamic> map) {
+  factory BlogModel.fromJson(Map<String, dynamic> map) {
     return BlogModel(
       id: map['id'] ?? '',
       posterId: map['poster_id'] ?? '',
@@ -21,7 +21,7 @@ class BlogModel extends Blog {
       imageUrl: map['image_url'] ?? '',
       topics: map['topics'] != null
           ? List<String>.from(map['topics'])
-          : <String>[],
+          : [],
       updatedAt: map['updated_at'] == null ?
           DateTime.now() :      
           DateTime.parse(map['updated_at'])
@@ -29,7 +29,7 @@ class BlogModel extends Blog {
   }
 
   /// ✅ Convert a Blog object back into a Map (for uploading/saving)
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'poster_id': posterId,
