@@ -15,10 +15,10 @@ class BlogModel extends Blog {
   factory BlogModel.fromMap(Map<String, dynamic> map) {
     return BlogModel(
       id: map['id'] ?? '',
-      posterId: map['posterId'] ?? '',
+      posterId: map['poster_id'] ?? '',
       title: map['title'] ?? '',
       content: map['content'] ?? '',
-      imageUrl: map['imageUrl'] ?? '',
+      imageUrl: map['image_url'] ?? '',
       topics: map['topics'] != null
           ? List<String>.from(map['topics'])
           : <String>[],
