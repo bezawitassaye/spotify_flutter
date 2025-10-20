@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify/core/common/cubits/app_user_cubit/app_user_cubit.dart';
 import 'package:spotify/core/theme/app_pallete.dart';
 import 'package:spotify/core/utils/pick_image.dart';
+import 'package:spotify/core/utils/show_snackbar.dart';
 import 'package:spotify/features/blog/presentation/bloc/blog_bloc_bloc.dart';
 import 'package:spotify/features/blog/presentation/widgets/blog_editor.dart';
 
@@ -70,7 +71,11 @@ class _NewBlogState extends State<NewBlog> {
       ),
       body: BlocConsumer<BlogBlocBloc, BlogBlocState>(
         listener: (context, state) {
-          // TODO: implement listener
+          if(state is BlogBlocFailure){
+            showSnackBar(context, state.error);
+          } else{
+            
+          }
         },
         builder: (context, state) {
           return SingleChildScrollView(
