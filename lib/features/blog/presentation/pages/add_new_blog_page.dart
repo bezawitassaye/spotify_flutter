@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify/core/common/cubits/app_user_cubit/app_user_cubit.dart';
+import 'package:spotify/core/common/widgets/loader.dart';
 import 'package:spotify/core/theme/app_pallete.dart';
 import 'package:spotify/core/utils/pick_image.dart';
 import 'package:spotify/core/utils/show_snackbar.dart';
@@ -80,6 +81,9 @@ class _NewBlogState extends State<NewBlog> {
           }
         },
         builder: (context, state) {
+          if(state is BlogBlocFailure){
+            return const Loader();
+          }
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
