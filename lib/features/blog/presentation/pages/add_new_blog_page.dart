@@ -8,6 +8,7 @@ import 'package:spotify/core/theme/app_pallete.dart';
 import 'package:spotify/core/utils/pick_image.dart';
 import 'package:spotify/core/utils/show_snackbar.dart';
 import 'package:spotify/features/blog/presentation/bloc/blog_bloc_bloc.dart';
+import 'package:spotify/features/blog/presentation/pages/blog_page.dart';
 import 'package:spotify/features/blog/presentation/widgets/blog_editor.dart';
 
 class NewBlog extends StatefulWidget {
@@ -74,7 +75,8 @@ class _NewBlogState extends State<NewBlog> {
           if(state is BlogBlocFailure){
             showSnackBar(context, state.error);
           } else if(state is BlogBlocUploadSuccess){
-            Navigator.pushAndRemoveUntil(context, newRoute, predicate)
+            Navigator.pushAndRemoveUntil(
+              context, BlogPage.route(), (route) => false);
           }
         },
         builder: (context, state) {
