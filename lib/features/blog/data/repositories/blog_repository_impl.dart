@@ -10,6 +10,7 @@ import 'package:uuid/uuid.dart';
 
 class BlogRepositoryImpl implements BlogRepository {
   final BlogRemoteDataSource blogRemoteDataSource;
+  // final ConnectionChecker connectionChecker;
 
   BlogRepositoryImpl(this.blogRemoteDataSource);
 
@@ -48,6 +49,21 @@ class BlogRepositoryImpl implements BlogRepository {
       final uploadedBlog = await blogRemoteDataSource.uploadBlog(blogModel);
 
       return right(uploadedBlog);
+    } on ServerException catch (e) {
+      return left(Failures(e.message));
+    }
+  }
+  
+  @override
+  Future<Either<Failures, List<Blog>>> getAllBlogs() async {
+    try {
+      // if (!await (connectionChecker.isConnected)) {
+      //   final blogs = blogLocalDataSource.loadBlogs();
+      //   return right(blogs);
+      // }
+      final blogs = await blogRemoteDataSource.getAllBlogs();
+      // blogLocalDataSource.uploadLocalBlogs(blogs: blogs);
+      return right(blogs);
     } on ServerException catch (e) {
       return left(Failures(e.message));
     }
