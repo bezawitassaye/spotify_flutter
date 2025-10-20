@@ -17,6 +17,7 @@ class NewBlog extends StatefulWidget {
 class _NewBlogState extends State<NewBlog> {
   final titleController = TextEditingController();
   final contentController = TextEditingController();
+  final formkey= GlobalKey<FormState>();
   List<String> selectedTopics=[];
   File? image;
   void selectImage() async{
