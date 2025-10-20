@@ -4,6 +4,7 @@ import 'package:spotify/core/error/exceptions.dart';
 import 'package:spotify/core/error/failures.dart';
 import 'package:spotify/features/blog/data/datasources/blog_remote_data_source.dart';
 import 'package:spotify/features/blog/data/models/blog_model.dart';
+import 'package:spotify/features/blog/domain/entities/blog.dart';
 import 'package:spotify/features/blog/domain/repositories/blog_repository.dart';
 import 'package:uuid/uuid.dart';
 
@@ -13,7 +14,7 @@ class BlogRepositoryImpl implements BlogRepository {
   BlogRepositoryImpl({required this.blogRemoteDataSource});
 
   @override
-  Future<Either<Failures, String>> uploadBlog({
+  Future<Either<Failures, Blog>> uploadBlog({
     required File image,
     required String title,
     required String content,
@@ -38,13 +39,15 @@ class BlogRepositoryImpl implements BlogRepository {
         blog: blogModel,
       );
 
-      // Update model with image URL
-      blogModel = blogModel.copyWith(imageUrl: imageUrl);
+      blogModel = blogModel.copyWith(
+        imageUrl: imageUrl
+      );
 
-      // Upload full blog data
-      await blogRemoteDataSource.uploadBlog(blogModel);
 
-      return right(blogModel.id);
+
+      final uploadedBlog = await blogRemoteDataSource.uploadBlog(blogModel);
+
+      return right(uploadedBlog);
     } on ServerException catch (e) {
       return left(Failures(e.message));
     }
