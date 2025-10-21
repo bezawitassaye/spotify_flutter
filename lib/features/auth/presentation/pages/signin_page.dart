@@ -7,6 +7,7 @@ import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:spotify/features/auth/presentation/pages/signup_page.dart';
 import 'package:spotify/features/auth/presentation/widget/auth_fiels.dart';
 import 'package:spotify/features/auth/presentation/widget/auth_gradinet_button.dart';
+import 'package:spotify/features/blog/presentation/pages/blog_page.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -48,6 +49,11 @@ class _SignInPageState extends State<SignInPage>
           listener: (context, state) {
             if(state is AuthFailure){
               showSnackBar(context, state.message);
+            } else if(state is AuthSuccess){
+              Navigator.pushAndRemoveUntil(
+                context, BlogPage.route(), 
+                (route)=> false);
+
             }
           },
           builder: (context, state) {
