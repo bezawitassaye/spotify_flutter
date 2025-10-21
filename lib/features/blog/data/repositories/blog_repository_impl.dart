@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:fpdart/fpdart.dart';
 import 'package:spotify/core/error/exceptions.dart';
 import 'package:spotify/core/error/failures.dart';
+import 'package:spotify/core/network/conncetion_checker.dart';
+import 'package:spotify/features/blog/data/datasources/blog_local_datasources.dart';
 import 'package:spotify/features/blog/data/datasources/blog_remote_data_source.dart';
 import 'package:spotify/features/blog/data/models/blog_model.dart';
 import 'package:spotify/features/blog/domain/entities/blog.dart';
@@ -10,9 +12,10 @@ import 'package:uuid/uuid.dart';
 
 class BlogRepositoryImpl implements BlogRepository {
   final BlogRemoteDataSource blogRemoteDataSource;
-  // final ConnectionChecker connectionChecker;
+  final ConnectionChecker connectionChecker;
+  final BlogLocalDataSource blogLocalDataSource;
 
-  BlogRepositoryImpl(this.blogRemoteDataSource);
+  BlogRepositoryImpl(this.blogRemoteDataSource, this.connectionChecker, this.blogLocalDataSource);
 
   @override
   Future<Either<Failures, Blog>> uploadBlog({
