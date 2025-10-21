@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/core/utils/clculating_reading_time.dart';
 import 'package:spotify/features/blog/domain/entities/blog.dart';
 
 class BlogCard extends StatelessWidget {
@@ -47,7 +48,7 @@ class BlogCard extends StatelessWidget {
             ],
           ),
 
-          Text("1 min"),
+          Text("${calculateReadingTime(blog.content)} min read"),
         ],
       ),
     );
