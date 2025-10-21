@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify/core/common/widgets/loader.dart';
+import 'package:spotify/core/theme/app_pallete.dart';
 import 'package:spotify/core/utils/show_snackbar.dart';
 import 'package:spotify/features/blog/presentation/bloc/blog_bloc_bloc.dart';
 import 'package:spotify/features/blog/presentation/pages/add_new_blog_page.dart';
+import 'package:spotify/features/blog/presentation/widgets/blog_card.dart';
 
 class BlogPage extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -52,7 +54,7 @@ class _BlogPageState extends State<BlogPage> {
               itemCount: state.blogs.length ,
               itemBuilder: (context,index){
                 final blog = state.blogs[index];
-                return Text(blog.title);
+                return BlogCard(blog: blog,color: AppPallete.gradient1,);
               }
               );
 
