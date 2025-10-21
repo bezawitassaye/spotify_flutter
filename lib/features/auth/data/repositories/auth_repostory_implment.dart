@@ -1,15 +1,16 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:spotify/core/error/exceptions.dart';
 import 'package:spotify/core/error/failures.dart';
+import 'package:spotify/core/network/conncetion_checker.dart';
 import 'package:spotify/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:spotify/core/common/entities/user.dart';
 import 'package:spotify/features/auth/domain/repository/auth_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sb;
 
 class AuthRepostoryImplment implements AuthRepository {
-  
+  final ConnectionChecker connectionChecker;
   final AuthRemoteDataSource remoteDataSource;
-  const AuthRepostoryImplment(this.remoteDataSource);
+  const AuthRepostoryImplment(this.remoteDataSource, this.connectionChecker);
 
   @override
   Future<Either<Failures, User>> signInWithEmailPassword({
