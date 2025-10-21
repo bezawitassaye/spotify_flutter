@@ -43,10 +43,11 @@ class AuthRepostoryImplment implements AuthRepository {
     Future<User> Function() fn,
   ) async{
     try{
+      if(!await connectionChecker.isConnected){
+        return left(Failures('No internet connection'));
+      }
       final user = await fn();
-        
-        
-        return right(user);
+      return right(user);
     } on sb.AuthException catch(e){
          return left(Failures(e.message));
     }
