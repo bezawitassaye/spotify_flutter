@@ -68,7 +68,7 @@ class BlogRepositoryImpl implements BlogRepository {
         return right(blogs);
       }
       final blogs = await blogRemoteDataSource.getAllBlogs();
-      // blogLocalDataSource.uploadLocalBlogs(blogs: blogs);
+      blogLocalDataSource.uploadLocalBlogs(blogs: blogs);
       return right(blogs);
     } on ServerException catch (e) {
       return left(Failures(e.message));
