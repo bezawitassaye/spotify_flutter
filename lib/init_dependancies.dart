@@ -11,6 +11,7 @@ import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:spotify/features/blog/data/datasources/blog_remote_data_source.dart';
 import 'package:spotify/features/blog/data/repositories/blog_repository_impl.dart';
 import 'package:spotify/features/blog/domain/repositories/blog_repository.dart';
+import 'package:spotify/features/blog/domain/usecases/get_all_blogs.dart';
 import 'package:spotify/features/blog/domain/usecases/upload_blog.dart';
 import 'package:spotify/features/blog/presentation/bloc/blog_bloc_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -62,9 +63,10 @@ void _initBlog() {
 
   serviceLocator.registerFactory(() => UploadBlog(serviceLocator()));
 
+  serviceLocator.registerFactory(()=> GetAllBlogs(serviceLocator()));
 
   serviceLocator.registerLazySingleton(
-    () => BlogBlocBloc(serviceLocator())
+    () => BlogBlocBloc(getAllBlogs: serviceLocator(), uploadBlog: serviceLocator()),
   );
 
 

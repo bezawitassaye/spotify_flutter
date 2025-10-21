@@ -12,9 +12,12 @@ final class BlogBlocFailure extends BlogBlocState {
   BlogBlocFailure(this.error);
 }
 
-final class BlogBlocUploadSuccess extends BlogBlocState {}
-
-final class BlogBlocDisplaySuccess extends BlogBlocState {
-  final List<Blog> blogs;
-  BlogBlocDisplaySuccess(this.blogs);
+final class BlogBlocUploadSuccess extends BlogBlocState {
+ 
 }
+
+final class BlogDisplaySuccess extends BlogBlocState {
+  final List<Blog> blogs;
+  BlogDisplaySuccess(this.blogs);
+}
+
