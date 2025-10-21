@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:spotify/core/common/cubits/app_user_cubit/app_user_cubit.dart';
 import 'package:spotify/core/network/conncetion_checker.dart';
 import 'package:spotify/core/secrets/app_secrets.dart';
@@ -10,6 +12,7 @@ import 'package:spotify/features/auth/domain/usecase/current_user.dart';
 import 'package:spotify/features/auth/domain/usecase/user_sign_in.dart';
 import 'package:spotify/features/auth/domain/usecase/user_sign_up.dart';
 import 'package:spotify/features/auth/presentation/bloc/auth_bloc_bloc.dart';
+import 'package:spotify/features/blog/data/datasources/blog_local_datasources.dart';
 import 'package:spotify/features/blog/data/datasources/blog_remote_data_source.dart';
 import 'package:spotify/features/blog/data/repositories/blog_repository_impl.dart';
 import 'package:spotify/features/blog/domain/repositories/blog_repository.dart';
@@ -27,8 +30,12 @@ Future<void> initDependencies() async {
     url: AppSecrets.supabaseUrl,
     anonKey: AppSecrets.anonKey,
   );
+   Hive.defaultDirectory = (await getApplicationDocumentsDirectory()).path;
   serviceLocator.registerLazySingleton(() => supbase.client);
   serviceLocator.registerLazySingleton(() => AppUserCubit(),);
+  serviceLocator.registerLazySingleton(
+    () => Hive.box(name: 'blogs'),
+  );
 }
 
 void _initAuth() {
@@ -60,16 +67,17 @@ void _initBlog() {
   );
 
   serviceLocator.registerFactory<BlogRepository>(
-    () => BlogRepositoryImpl(serviceLocator()),
+    () => BlogRepositoryImpl(serviceLocator(),serviceLocator(),serviceLocator()),
   );
 
   serviceLocator.registerFactory(() =>  InternetConnection());
 
   serviceLocator.registerFactory(() => UploadBlog(serviceLocator()));
 
-  serviceLocator.registerFactory(()=> GetAllBlogs(serviceLocator()));
+  serviceLocator.registerFactory(() => GetAllBlogs(serviceLocator()));
 
-  serviceLocator.registerFactory<ConnectionChecker>(() => ConnectionCheckerImpl(serviceLocator())); 
+  serviceLocator.registerFactory<BlogLocalDataSource>(() => BlogLocalDataSourceImpl(serviceLocator()));
+  serviceLocator.registerFactory<ConnectionChecker>(() => ConnectionCheckerImpl(serviceLocator()));
   serviceLocator.registerLazySingleton(
     () => BlogBlocBloc(getAllBlogs: serviceLocator(), uploadBlog: serviceLocator()),
   );
