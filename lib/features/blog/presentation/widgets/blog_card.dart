@@ -20,25 +20,34 @@ class BlogCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: blog.topics
-                  .map(
-                    (e) => Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Chip(label: Text(e)),
-                    ),
-                  )
-                  .toList(),
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: blog.topics
+                      .map(
+                        (e) => Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Chip(label: Text(e)),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                blog.title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
-          Text(
-            blog.title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          Text("1 min")
+
+          Text("1 min"),
         ],
       ),
     );
