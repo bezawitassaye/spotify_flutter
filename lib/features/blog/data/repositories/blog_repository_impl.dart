@@ -26,6 +26,9 @@ class BlogRepositoryImpl implements BlogRepository {
     required List<String> topics,
   }) async {
     try {
+      if(!await (connectionChecker.isConnected)) {
+        return left(Failures("No Internet Connection"));
+      }
       // Create blog model
       BlogModel blogModel = BlogModel(
         id: const Uuid().v1(),
