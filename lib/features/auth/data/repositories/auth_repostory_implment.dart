@@ -4,6 +4,7 @@ import 'package:spotify/core/error/failures.dart';
 import 'package:spotify/core/network/conncetion_checker.dart';
 import 'package:spotify/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:spotify/core/common/entities/user.dart';
+import 'package:spotify/features/auth/data/models/user_model.dart';
 import 'package:spotify/features/auth/domain/repository/auth_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sb;
 
@@ -61,6 +62,21 @@ class AuthRepostoryImplment implements AuthRepository {
   @override
   Future<Either<Failures, User>> currentUser() async {
     try{
+      if (!await (connectionChecker.isConnected)) {
+        final session = remoteDataSource.currentSession;
+
+        if (session == null) {
+          return left(Failures('User not logged in!'));
+        }
+
+        return right(
+          UserModel(
+            id: session.user.id,
+            email: session.user.email ?? '',
+            name: '',
+          ),
+        );
+      }
       final user = await remoteDataSource.getCurrentUserData();
       if (user == null) {
         return left(Failures('user not logged in'));
